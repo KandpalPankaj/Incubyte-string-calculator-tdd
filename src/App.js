@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { add } from "./utils/calculatorUtils";
 
 function App() {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
+
+  const handleCalculate = () => {
+    try {
+      setError("");
+      const sum = add(input);
+      setResult(sum);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>String Calculator</h1>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter numbers"
+      />
+      <button onClick={handleCalculate}>Calculate</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {result !== null && <p>Result: {result}</p>}
     </div>
   );
 }
