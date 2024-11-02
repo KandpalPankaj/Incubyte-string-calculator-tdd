@@ -29,6 +29,11 @@ test('should handle custom delimiters specified in the format "//[delimiter]\\n"
   expect(add("//{\n1{2{3")).toBe(6);
 });
 
+test('should handle long custom delimiters specified in the format "//[delimiter]\\n"', () => {
+  expect(add("//;;\n1;;2")).toBe(3);
+  expect(add("//{{{\n1{{{2{{{3")).toBe(6);
+});
+
 test("should list all negative numbers in the exception message", () => {
   expect(() => add("1,-2,-3")).toThrow("negative numbers not allowed: -2, -3");
 });
