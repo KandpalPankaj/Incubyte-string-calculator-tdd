@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { add } from "./utils/calculatorUtils";
 
+import "./App.css";
+
 function App() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState(null);
@@ -13,11 +15,12 @@ function App() {
       setResult(sum);
     } catch (err) {
       setError(err.message);
+      setResult(null);
     }
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>String Calculator</h1>
       <input
         type="text"
@@ -26,8 +29,8 @@ function App() {
         placeholder="Enter numbers"
       />
       <button onClick={handleCalculate}>Calculate</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {result !== null && <p>Result: {result}</p>}
+      {error && <p className="error">{error}</p>}
+      {result !== null && <p className="result">Result: {result}</p>}
     </div>
   );
 }
