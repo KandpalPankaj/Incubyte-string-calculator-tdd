@@ -11,7 +11,7 @@ function App() {
   const handleCalculate = () => {
     try {
       setError("");
-      const sum = add(input);
+      const sum = add(input.replace(/\\n/, "\n"));
       setResult(sum);
     } catch (err) {
       setError(err.message);
