@@ -8,23 +8,31 @@ export function add(numbers) {
 }
 
 function extractCustomDelimiter(numbers, delimiter) {
-  if (numbers.startsWith("//")) {
-    const parts = numbers.split("\n");
-    const customDelimiters = parts[0]
-      .slice(2)
-      .split(/[[\]]+/)
-      .filter(Boolean);
-    delimiter = new RegExp(customDelimiters.join("|"), "g");
-    return [parts[1], delimiter];
+  try {
+    if (numbers.startsWith("//")) {
+      const parts = numbers.split("\n");
+      const customDelimiters = parts[0]
+        .slice(2)
+        .split(/[[\]]+/)
+        .filter(Boolean);
+      delimiter = new RegExp(customDelimiters.join("|"), "g");
+      return [parts[1], delimiter];
+    }
+    return [numbers, delimiter];
+  } catch (error) {
+    throw new Error("Please enter correct delimiters");
   }
-  return [numbers, delimiter];
 }
 
 function parseNumbers(numbers, delimiter) {
-  return numbers
-    .split(delimiter)
-    .map((num) => parseInt(num, 10))
-    .filter(Boolean);
+  try {
+    return numbers
+      .split(delimiter)
+      .map((num) => parseInt(num, 10))
+      .filter(Boolean);
+  } catch (error) {
+    throw new Error("Please enter correct numbers");
+  }
 }
 
 function checkForNegatives(numArray) {
@@ -35,5 +43,9 @@ function checkForNegatives(numArray) {
 }
 
 function sumNumbers(numArray) {
-  return numArray.reduce((sum, num) => sum + num, 0);
+  try {
+    return numArray.reduce((sum, num) => sum + num, 0);
+  } catch (error) {
+    throw new Error("Please enter correct numbers");
+  }
 }
