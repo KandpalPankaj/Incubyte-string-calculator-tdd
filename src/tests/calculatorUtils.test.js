@@ -26,5 +26,5 @@ test("should handle new lines between numbers", () => {
 
 test('should handle custom delimiters specified in the format "//[delimiter]\\n"', () => {
   expect(add("//;\n1;2")).toBe(3);
-  expect(add("//|\n1|2|3")).toBe(6);
+  expect(add("//{\n1{2{3")).toBe(6);
 });
